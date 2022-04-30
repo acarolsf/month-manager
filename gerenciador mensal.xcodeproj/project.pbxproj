@@ -7,25 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DECE9C1B281D6EBF00964B99 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE9C1A281D6EBF00964B99 /* HomeViewController.swift */; };
+		DECE9C1D281D702900964B99 /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE9C1C281D702900964B99 /* UIView+Utils.swift */; };
+		DECE9C1F281D769800964B99 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE9C1E281D769800964B99 /* HomePresenter.swift */; };
+		DECE9C21281D76A700964B99 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE9C20281D76A700964B99 /* LoginPresenter.swift */; };
+		DECE9C23281D77F600964B99 /* Threading.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE9C22281D77F600964B99 /* Threading.swift */; };
+		DECE9C26281D7A6700964B99 /* RegisterItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE9C25281D7A6700964B99 /* RegisterItemViewController.swift */; };
+		DECE9C28281D859D00964B99 /* TextField+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE9C27281D859D00964B99 /* TextField+Utils.swift */; };
+		DECE9C2A281D8CA200964B99 /* RegisterItemPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE9C29281D8CA200964B99 /* RegisterItemPresenter.swift */; };
 		DEDCFE3F281C9C09008B0D96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDCFE3E281C9C09008B0D96 /* AppDelegate.swift */; };
 		DEDCFE41281C9C09008B0D96 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDCFE40281C9C09008B0D96 /* SceneDelegate.swift */; };
-		DEDCFE43281C9C09008B0D96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDCFE42281C9C09008B0D96 /* ViewController.swift */; };
-		DEDCFE46281C9C09008B0D96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEDCFE44281C9C09008B0D96 /* Main.storyboard */; };
+		DEDCFE43281C9C09008B0D96 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDCFE42281C9C09008B0D96 /* LoginViewController.swift */; };
 		DEDCFE49281C9C09008B0D96 /* gerenciador_mensal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DEDCFE47281C9C09008B0D96 /* gerenciador_mensal.xcdatamodeld */; };
 		DEDCFE4B281C9C0B008B0D96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DEDCFE4A281C9C0B008B0D96 /* Assets.xcassets */; };
 		DEDCFE4E281C9C0B008B0D96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEDCFE4C281C9C0B008B0D96 /* LaunchScreen.storyboard */; };
+		DEDCFE5B281CA28E008B0D96 /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDCFE5A281CA28E008B0D96 /* UIImage+Utils.swift */; };
+		DEDCFE5D281CA4DB008B0D96 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDCFE5C281CA4DB008B0D96 /* UIColor+Utils.swift */; };
+		DEDCFE60281CA65C008B0D96 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDCFE5F281CA65C008B0D96 /* TextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DECE9C1A281D6EBF00964B99 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		DECE9C1C281D702900964B99 /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
+		DECE9C1E281D769800964B99 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		DECE9C20281D76A700964B99 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
+		DECE9C22281D77F600964B99 /* Threading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Threading.swift; sourceTree = "<group>"; };
+		DECE9C25281D7A6700964B99 /* RegisterItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterItemViewController.swift; sourceTree = "<group>"; };
+		DECE9C27281D859D00964B99 /* TextField+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TextField+Utils.swift"; sourceTree = "<group>"; };
+		DECE9C29281D8CA200964B99 /* RegisterItemPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterItemPresenter.swift; sourceTree = "<group>"; };
 		DEDCFE3B281C9C09008B0D96 /* gerenciador mensal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "gerenciador mensal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEDCFE3E281C9C09008B0D96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DEDCFE40281C9C09008B0D96 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DEDCFE42281C9C09008B0D96 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		DEDCFE45281C9C09008B0D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DEDCFE42281C9C09008B0D96 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DEDCFE48281C9C09008B0D96 /* gerenciador_mensal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = gerenciador_mensal.xcdatamodel; sourceTree = "<group>"; };
 		DEDCFE4A281C9C0B008B0D96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DEDCFE4D281C9C0B008B0D96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DEDCFE4F281C9C0B008B0D96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DEDCFE5A281CA28E008B0D96 /* UIImage+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
+		DEDCFE5C281CA4DB008B0D96 /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
+		DEDCFE5F281CA65C008B0D96 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +59,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DECE9C15281D6C7C00964B99 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				DECE9C24281D7A1F00964B99 /* Register Item */,
+				DECE9C19281D6EA200964B99 /* Home */,
+				DECE9C18281D6CCA00964B99 /* Login */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		DECE9C16281D6C9600964B99 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				DEDCFE3E281C9C09008B0D96 /* AppDelegate.swift */,
+				DEDCFE40281C9C09008B0D96 /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		DECE9C17281D6CB800964B99 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DEDCFE4A281C9C0B008B0D96 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DECE9C18281D6CCA00964B99 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				DEDCFE42281C9C09008B0D96 /* LoginViewController.swift */,
+				DECE9C20281D76A700964B99 /* LoginPresenter.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		DECE9C19281D6EA200964B99 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				DECE9C1A281D6EBF00964B99 /* HomeViewController.swift */,
+				DECE9C1E281D769800964B99 /* HomePresenter.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		DECE9C24281D7A1F00964B99 /* Register Item */ = {
+			isa = PBXGroup;
+			children = (
+				DECE9C25281D7A6700964B99 /* RegisterItemViewController.swift */,
+				DECE9C29281D8CA200964B99 /* RegisterItemPresenter.swift */,
+			);
+			path = "Register Item";
+			sourceTree = "<group>";
+		};
 		DEDCFE32281C9C09008B0D96 = {
 			isa = PBXGroup;
 			children = (
@@ -58,16 +132,36 @@
 		DEDCFE3D281C9C09008B0D96 /* gerenciador mensal */ = {
 			isa = PBXGroup;
 			children = (
-				DEDCFE3E281C9C09008B0D96 /* AppDelegate.swift */,
-				DEDCFE40281C9C09008B0D96 /* SceneDelegate.swift */,
-				DEDCFE42281C9C09008B0D96 /* ViewController.swift */,
-				DEDCFE44281C9C09008B0D96 /* Main.storyboard */,
-				DEDCFE4A281C9C0B008B0D96 /* Assets.xcassets */,
+				DECE9C17281D6CB800964B99 /* Resources */,
+				DECE9C16281D6C9600964B99 /* Delegates */,
+				DECE9C15281D6C7C00964B99 /* Scenes */,
+				DEDCFE5E281CA644008B0D96 /* Components */,
+				DEDCFE59281CA27C008B0D96 /* Common */,
 				DEDCFE4C281C9C0B008B0D96 /* LaunchScreen.storyboard */,
 				DEDCFE4F281C9C0B008B0D96 /* Info.plist */,
 				DEDCFE47281C9C09008B0D96 /* gerenciador_mensal.xcdatamodeld */,
 			);
 			path = "gerenciador mensal";
+			sourceTree = "<group>";
+		};
+		DEDCFE59281CA27C008B0D96 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				DEDCFE5A281CA28E008B0D96 /* UIImage+Utils.swift */,
+				DEDCFE5C281CA4DB008B0D96 /* UIColor+Utils.swift */,
+				DECE9C1C281D702900964B99 /* UIView+Utils.swift */,
+				DECE9C22281D77F600964B99 /* Threading.swift */,
+				DECE9C27281D859D00964B99 /* TextField+Utils.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		DEDCFE5E281CA644008B0D96 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				DEDCFE5F281CA65C008B0D96 /* TextField.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,7 +224,6 @@
 			files = (
 				DEDCFE4E281C9C0B008B0D96 /* LaunchScreen.storyboard in Resources */,
 				DEDCFE4B281C9C0B008B0D96 /* Assets.xcassets in Resources */,
-				DEDCFE46281C9C09008B0D96 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,9 +234,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEDCFE43281C9C09008B0D96 /* ViewController.swift in Sources */,
+				DEDCFE43281C9C09008B0D96 /* LoginViewController.swift in Sources */,
+				DECE9C2A281D8CA200964B99 /* RegisterItemPresenter.swift in Sources */,
+				DECE9C28281D859D00964B99 /* TextField+Utils.swift in Sources */,
 				DEDCFE49281C9C09008B0D96 /* gerenciador_mensal.xcdatamodeld in Sources */,
+				DECE9C26281D7A6700964B99 /* RegisterItemViewController.swift in Sources */,
 				DEDCFE3F281C9C09008B0D96 /* AppDelegate.swift in Sources */,
+				DECE9C1F281D769800964B99 /* HomePresenter.swift in Sources */,
+				DECE9C23281D77F600964B99 /* Threading.swift in Sources */,
+				DECE9C21281D76A700964B99 /* LoginPresenter.swift in Sources */,
+				DECE9C1B281D6EBF00964B99 /* HomeViewController.swift in Sources */,
+				DEDCFE60281CA65C008B0D96 /* TextField.swift in Sources */,
+				DEDCFE5D281CA4DB008B0D96 /* UIColor+Utils.swift in Sources */,
+				DEDCFE5B281CA28E008B0D96 /* UIImage+Utils.swift in Sources */,
+				DECE9C1D281D702900964B99 /* UIView+Utils.swift in Sources */,
 				DEDCFE41281C9C09008B0D96 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,14 +255,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		DEDCFE44281C9C09008B0D96 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DEDCFE45281C9C09008B0D96 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		DEDCFE4C281C9C0B008B0D96 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -221,7 +317,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -276,7 +372,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -296,9 +392,9 @@
 				DEVELOPMENT_TEAM = K6X2T8VLH6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "gerenciador mensal/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Gerenciador Mensal";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -310,7 +406,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -324,9 +420,9 @@
 				DEVELOPMENT_TEAM = K6X2T8VLH6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "gerenciador mensal/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Gerenciador Mensal";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -338,7 +434,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
