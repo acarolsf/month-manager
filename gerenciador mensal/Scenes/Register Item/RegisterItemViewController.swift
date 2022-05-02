@@ -7,15 +7,24 @@
 
 import UIKit
 
+enum RegisterOriging {
+    case register
+    case edit
+}
+
 class RegisterItemViewController: UIViewController {
     
     private let accountTypeList = ["Água", "Luz", "Internet"]
+    var origin: RegisterOriging?
+    
+    var keyboardShowing = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Cadastrar nova conta"
+        title = origin == .edit ? "Editar conta" : "Cadastrar nova conta"
         setupUI()
         setupConstraints()
+        keyboardHandler()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,6 +34,13 @@ class RegisterItemViewController: UIViewController {
             self.navigationController?.setNavigationBarHidden(false, animated: animated)
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeFromKeyboardNotifications()
+    }
+    
+    lazy var scrollView: UIScrollView = UIScrollView(constraintResizing: false)
     
     lazy var mainView = UIView(constraintResizing: false)
     
@@ -82,8 +98,19 @@ class RegisterItemViewController: UIViewController {
         return textField
     }()
     
+    lazy var registerItemButton: UIButton = {
+        let button = UIButton(constraintResizing: false)
+        button.setTitle("Cadastrar", for: .normal)
+        button.backgroundColor = UIColor(hex: "#054F77")
+        button.clipsToBounds = true
+        button.layer.cornerRadius = 4
+        button.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(registerItem)))
+        return button
+    }()
+    
     private func setupUI() {
-        view.addSubview(mainView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(mainView)
         [
             accountTypeLabel,
             accountTypeTextField,
@@ -92,7 +119,8 @@ class RegisterItemViewController: UIViewController {
             priceLabel,
             priceTextField,
             monthLabel,
-            monthTextField
+            monthTextField,
+            registerItemButton
             
         ].forEach({
             mainView.addSubview($0)
@@ -100,14 +128,30 @@ class RegisterItemViewController: UIViewController {
         
         mainView.backgroundColor = .white
         createProfilePicker()
+        
+        if origin == .edit {
+            accountTypeTextField.setDisabled()
+        }
     }
     
     private func setupConstraints() {
+        let mainViewHeightConstraint = mainView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
+        mainViewHeightConstraint.priority = .defaultLow
+        
         NSLayoutConstraint.activate([
-            mainView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mainView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            mainView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            mainView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            mainView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            mainView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            mainView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            mainView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            
+            mainView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            mainViewHeightConstraint,
             
             accountTypeLabel.topAnchor.constraint(equalTo: mainView.topAnchor, constant: 24),
             accountTypeLabel.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 24),
@@ -143,7 +187,12 @@ class RegisterItemViewController: UIViewController {
             monthTextField.topAnchor.constraint(equalTo: monthLabel.bottomAnchor, constant: 4),
             monthTextField.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 24),
             monthTextField.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -24),
-            monthTextField.heightAnchor.constraint(equalToConstant: 48)
+            monthTextField.heightAnchor.constraint(equalToConstant: 48),
+            
+            registerItemButton.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -16),
+            registerItemButton.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 24),
+            registerItemButton.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -24),
+            registerItemButton.heightAnchor.constraint(equalToConstant: 48)
         ])
     }
     
@@ -152,6 +201,11 @@ class RegisterItemViewController: UIViewController {
         profilePickerView.delegate = self
         profilePickerView.backgroundColor = UIColor.white
         accountTypeTextField.inputView = profilePickerView
+    }
+    
+    @objc func registerItem() {
+        print("Register Item")
+        navigationController?.popViewController(animated: true)
     }
 }
 
@@ -171,5 +225,45 @@ extension RegisterItemViewController: UIPickerViewDelegate, UIPickerViewDataSour
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         accountTypeTextField.text = row == 0 ? "" : accountTypeList[row-1]
+    }
+}
+
+extension RegisterItemViewController {
+    
+    func keyboardHandler() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clicked))
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func clicked() {
+        view.endEditing(true)
+    }
+    
+    // Fix keyboard position
+    func subscribeToKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if keyboardShowing { return }
+        keyboardShowing =  true
+        scrollView.contentInset.bottom += getKeyboardHeight(notification)
+    }
+    
+    func getKeyboardHeight(_ notification: Notification) -> CGFloat {
+        guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+            fatalError("cant get keyboard size")
+        }
+        return keyboardSize.cgRectValue.height
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        keyboardShowing = false
+        scrollView.contentInset.bottom -= getKeyboardHeight(notification)
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE51BCC9281D9F0A002447E0 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51BCC8281D9F0A002447E0 /* TableViewCell.swift */; };
+		DE51BCCC281DBA1D002447E0 /* HomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51BCCB281DBA1D002447E0 /* HomeHeader.swift */; };
 		DECE9C1B281D6EBF00964B99 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE9C1A281D6EBF00964B99 /* HomeViewController.swift */; };
 		DECE9C1D281D702900964B99 /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE9C1C281D702900964B99 /* UIView+Utils.swift */; };
 		DECE9C1F281D769800964B99 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE9C1E281D769800964B99 /* HomePresenter.swift */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE51BCC8281D9F0A002447E0 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		DE51BCCB281DBA1D002447E0 /* HomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeader.swift; sourceTree = "<group>"; };
 		DECE9C1A281D6EBF00964B99 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DECE9C1C281D702900964B99 /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
 		DECE9C1E281D769800964B99 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
@@ -59,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DE51BCCA281DBA08002447E0 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				DE51BCCB281DBA1D002447E0 /* HomeHeader.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
 		DECE9C15281D6C7C00964B99 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +110,7 @@
 		DECE9C19281D6EA200964B99 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				DE51BCCA281DBA08002447E0 /* Header */,
 				DECE9C1A281D6EBF00964B99 /* HomeViewController.swift */,
 				DECE9C1E281D769800964B99 /* HomePresenter.swift */,
 			);
@@ -160,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				DEDCFE5F281CA65C008B0D96 /* TextField.swift */,
+				DE51BCC8281D9F0A002447E0 /* TableViewCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -235,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEDCFE43281C9C09008B0D96 /* LoginViewController.swift in Sources */,
+				DE51BCC9281D9F0A002447E0 /* TableViewCell.swift in Sources */,
 				DECE9C2A281D8CA200964B99 /* RegisterItemPresenter.swift in Sources */,
 				DECE9C28281D859D00964B99 /* TextField+Utils.swift in Sources */,
 				DEDCFE49281C9C09008B0D96 /* gerenciador_mensal.xcdatamodeld in Sources */,
@@ -242,6 +257,7 @@
 				DEDCFE3F281C9C09008B0D96 /* AppDelegate.swift in Sources */,
 				DECE9C1F281D769800964B99 /* HomePresenter.swift in Sources */,
 				DECE9C23281D77F600964B99 /* Threading.swift in Sources */,
+				DE51BCCC281DBA1D002447E0 /* HomeHeader.swift in Sources */,
 				DECE9C21281D76A700964B99 /* LoginPresenter.swift in Sources */,
 				DECE9C1B281D6EBF00964B99 /* HomeViewController.swift in Sources */,
 				DEDCFE60281CA65C008B0D96 /* TextField.swift in Sources */,
@@ -317,7 +333,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -372,7 +388,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

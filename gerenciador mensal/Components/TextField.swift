@@ -22,6 +22,11 @@ class TextField: UITextField {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func setDisabled() {
+        isUserInteractionEnabled = false
+        backgroundColor = .lightGray
+    }
+    
     override public func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16))
     }

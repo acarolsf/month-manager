@@ -21,6 +21,16 @@ extension UIImage {
         return image
     }
     
+    public class var edit: UIImage {
+        guard let image = UIImage(named: "edit", in: Bundle(for: ImageManager.self), compatibleWith: nil) else { return UIImage() }
+        return image
+    }
+    
+    public class var remove: UIImage {
+        guard let image = UIImage(named: "remove", in: Bundle(for: ImageManager.self), compatibleWith: nil) else { return UIImage() }
+        return image
+    }
+    
     public class var expandMore: UIImage {
         guard let image = UIImage(named: "expand-more", in: Bundle(for: ImageManager.self), compatibleWith: nil) else { return UIImage() }
         return image
