@@ -8,14 +8,7 @@
 import Foundation
 import UIKit
 
-protocol TableViewCellDelegate: AnyObject {
-    func edit()
-}
-
 class TableViewCell: UITableViewCell {
-    
-    weak var delegate: TableViewCellDelegate?
-    var gesture: UITapGestureRecognizer?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -51,14 +44,6 @@ class TableViewCell: UITableViewCell {
         return label
     }()
     
-    lazy var editButton: UIButton = {
-        let button = UIButton(constraintResizing: false)
-        button.setImage(.edit, for: .normal)
-        button.tintColor = .blue
-        button.isUserInteractionEnabled = true
-        return button
-    }()
-    
     private func setupUI() {
         addSubview(mainView)
         [
@@ -67,11 +52,6 @@ class TableViewCell: UITableViewCell {
         ].forEach({
             mainView.addSubview($0)
         })
-        
-        guard let gesture = gesture else {
-            return
-        }
-        editButton.addGestureRecognizer(gesture)
     }
     
     private func setupConstraints() {
@@ -91,9 +71,9 @@ class TableViewCell: UITableViewCell {
             subTitleLabel.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -8)
         ])
     }
-    
-    @objc func goToEdit() {
-        self.delegate?.edit()
-    }
 
+    func setupCell(title: String?, subtitle: String?) {
+        self.titleLabel.text = title
+        self.subTitleLabel.text = subtitle
+    }
 }

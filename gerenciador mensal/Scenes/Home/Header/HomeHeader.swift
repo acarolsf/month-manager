@@ -10,6 +10,12 @@ import UIKit
 
 class HomeHeader: UIView {
     
+    var name: String? {
+        didSet {
+            self.welcomeLabel.text = "Olá, \(name ?? "")!"
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -24,7 +30,6 @@ class HomeHeader: UIView {
     
     lazy var welcomeLabel: UILabel = {
         let label = UILabel(constraintResizing: false)
-        label.text = "Olá, Carol"
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 24)
         return label

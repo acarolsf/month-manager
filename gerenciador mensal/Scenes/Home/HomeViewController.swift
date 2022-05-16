@@ -6,27 +6,43 @@
 //
 
 import UIKit
+import CoreData
 
 class HomeViewController: UIViewController {
     
-    let itemsOfTheList = ["a", "b", "c"]
+    var userName: String = "" {
+        didSet {
+            self.homeHeader.name = userName
+        }
+    }
+    
+    lazy var presenter = HomePresenter(view: self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+        setupNavigationBar()
+        self.presenter.fetcher.delegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableView.reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        view.backgroundColor = .white
+        self.presenter.fetchItems()
         ensureMainThread {
+            self.navigationController?.navigationBar.tintColor = .black
             self.navigationController?.setNavigationBarHidden(true, animated: false)
         }
     }
     
     lazy var homeHeader: HomeHeader = {
         let view = HomeHeader(constraintResizing: true)
-        
         return view
     }()
     
@@ -67,7 +83,7 @@ class HomeViewController: UIViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -80,7 +96,9 @@ class HomeViewController: UIViewController {
     }
     
     @objc func openRegisterNewItem() {
-        self.navigationController?.pushViewController(RegisterItemViewController(), animated: true)
+        let viewController = RegisterItemViewController()
+        viewController.modalPresentationCapturesStatusBarAppearance = true
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     @objc func goToEditPage() {
@@ -98,13 +116,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 1 {
-            return 30
+            return self.presenter.fetcher.fetchedObjects?.count ?? 0
         }
         return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell, let conta = self.presenter.fetcher.fetchedObjects?[indexPath.row] else { return UITableViewCell() }
+        
+        cell.setupCell(title: conta.descricao, subtitle: conta.tipoConta)
         return cell
 
     }
@@ -124,16 +144,10 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return nil
     }
 
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        if section == 0 {
-//            return self.homeHeader.bounds.size.height
-//        }
-//        return 0
-//    }
-//
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let completeAction = UIContextualAction(style: .normal, title: "Editar") { (_, _, completionHandler) in
             // delete the item here
+            self.goToEditPage()
             completionHandler(true)
         }
         completeAction.image = .edit
@@ -145,8 +159,8 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let completeAction = UIContextualAction(style: .normal, title: "Excluir") { (_, _, completionHandler) in
-            // delete the item here
-            self.deleteAlert()
+            // delete the item her
+            self.deleteAlert(indexPath.row)
             completionHandler(true)
         }
         completeAction.image = .remove
@@ -156,13 +170,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return configuration
     }
     
-    func deleteAlert() {
+    func deleteAlert(_ item: Int) {
         
         let delete = UIAlertController(title: "Excluir conta", message: "Deseja realmente excluir a Conta da água?", preferredStyle: .alert)
         
             
         let deleteAction = UIAlertAction(title: "Sim", style: .destructive) { _ in
             print("Excluir")
+            self.presenter.deleteConta(item)
         }
         
         let cancelAction = UIAlertAction(title: "Não", style: .cancel) { _ in
@@ -173,5 +188,32 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         delete.addAction(cancelAction)
         
         present(delete, animated: true, completion: nil)
+    }
+}
+
+extension HomeViewController: HomeViewProtocol {
+    func removeItem(at index: IndexPath) {
+        ensureMainThread {
+            self.tableView.deleteRows(at: [index], with: .fade)
+        }
+    }
+    
+    func reloadData() {
+        ensureMainThread {
+            self.tableView.reloadData()
+        }
+    }
+}
+
+extension HomeViewController: NSFetchedResultsControllerDelegate {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .delete:
+            if let indexPath = indexPath {
+                self.removeItem(at: indexPath)
+            }
+        default:
+            self.reloadData()
+        }
     }
 }
