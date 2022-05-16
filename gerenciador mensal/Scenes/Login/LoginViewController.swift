@@ -8,16 +8,20 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
+    lazy var presenter = LoginPresenter(view: self)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         setupConstraints()
+        self.presenter.checkIfUserIsLogged()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        DispatchQueue.main.async {
+        view.backgroundColor = .white
+        ensureMainThread {
             self.navigationController?.setNavigationBarHidden(true, animated: true)
         }
     }
@@ -70,7 +74,7 @@ class LoginViewController: UIViewController {
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            mainView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            mainView.topAnchor.constraint(equalTo: view.topAnchor),
             mainView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             mainView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             mainView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -98,8 +102,16 @@ class LoginViewController: UIViewController {
     
     // MARK: - Actions
     @objc func openHome() {
-        navigationController?.pushViewController(HomeViewController(), animated: true)
+        self.presenter.login(userName: self.nameTextField.text)
     }
 }
 
-
+extension LoginViewController: LoginViewProtocol {
+    func goToHome(name: String) {
+        let viewController = HomeViewController()
+        viewController.userName = name
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    
+}
