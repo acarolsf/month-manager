@@ -139,6 +139,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             let header = self.homeHeader
+            header.total = self.presenter.getTotal()
             return header
         }
         return nil
@@ -170,14 +171,16 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return configuration
     }
     
-    func deleteAlert(_ item: IndexPath) {
+    func deleteAlert(_ index: IndexPath) {
         
-        let delete = UIAlertController(title: "Excluir conta", message: "Deseja realmente excluir a Conta da água?", preferredStyle: .alert)
+        guard let item = presenter.fetcher.fetchedObjects?[index.row] else { return }
+        
+        let delete = UIAlertController(title: "Excluir conta", message: "Deseja realmente excluir \(item.descricao)?", preferredStyle: .alert)
         
             
         let deleteAction = UIAlertAction(title: "Sim", style: .destructive) { _ in
             print("Excluir")
-            self.presenter.deleteConta(item)
+            self.presenter.deleteConta(index)
         }
         
         let cancelAction = UIAlertAction(title: "Não", style: .cancel) { _ in
@@ -195,6 +198,7 @@ extension HomeViewController: HomeViewProtocol {
     func removeItem(at index: IndexPath) {
         ensureMainThread {
             self.tableView.deleteRows(at: [IndexPath(item: index.row, section: 1)], with: .fade)
+            self.tableView.reloadData()
         }
     }
     

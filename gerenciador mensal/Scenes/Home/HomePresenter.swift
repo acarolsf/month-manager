@@ -41,4 +41,26 @@ class HomePresenter {
         guard let conta = fetcher.fetchedObjects?[index.row] else { return }
         conta.deleteConta(coreDataManager.persistentContainer.viewContext)
     }
+    
+    func getTotal() -> String {
+        var total = 0.0
+        guard let objects = fetcher.fetchedObjects else { return "" }
+        
+        objects.forEach({ total += $0.preco })
+        
+        if let totalString = getPrice(total) {
+            return totalString
+        }
+        return ""
+    }
+    
+    func getPrice(_ value: Double) -> String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.locale = Locale(identifier: "pt_BR")
+        numberFormatter.numberStyle = .currency
+        
+        let number = NSNumber(value: value)
+        
+        return numberFormatter.string(from: number)
+    }
 }

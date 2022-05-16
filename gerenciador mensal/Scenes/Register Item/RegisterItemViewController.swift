@@ -139,7 +139,7 @@ class RegisterItemViewController: UIViewController {
         })
         
         mainView.backgroundColor = .white
-//        createProfilePicker()
+        createProfilePicker()
         
         if origin == .edit {
             accountTypeTextField.setDisabled()
@@ -218,7 +218,9 @@ class RegisterItemViewController: UIViewController {
     
     @objc func registerItem() {
         print("Register Item")
-        guard let tipoConta = accountTypeTextField.text, let descricao = descriptionTextField.text, let mes = getDate(data: monthTextField.text), let preco = getPrice(priceTextField.text) else { return }
+        guard let tipoConta = accountTypeTextField.text, let descricao = descriptionTextField.text, let mes = getDate(data: monthTextField.text) else { return }
+        
+        let preco = getPrice(priceTextField.text)
         
         let conta = Contas(tipoConta: tipoConta, descricao: descricao, mes: mes, preco: preco)
         
@@ -226,11 +228,14 @@ class RegisterItemViewController: UIViewController {
 
     }
     
-    func getPrice(_ value: String?) -> Double? {
+    func getPrice(_ value: String?) -> Double {
         let numberFormatter = NumberFormatter()
         numberFormatter.locale = Locale(identifier: "pt_BR")
         numberFormatter.numberStyle = .currency
-        
+    
+        if let value = value, let number = numberFormatter.number(from: value) {
+            return number.doubleValue
+        }
         return 0.0
     }
     

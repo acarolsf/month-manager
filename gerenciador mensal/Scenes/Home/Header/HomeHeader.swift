@@ -16,6 +16,12 @@ class HomeHeader: UIView {
         }
     }
     
+    var total: String? {
+        didSet {
+            self.cardPrice.text = total
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -58,7 +64,6 @@ class HomeHeader: UIView {
     
     lazy var cardPrice: UILabel = {
         let label = UILabel(constraintResizing: false)
-        label.text = "R$ 1000,00"
         label.textColor = UIColor(hex: "#054F77")
         label.font = .boldSystemFont(ofSize: 32)
         label.textAlignment = .center
