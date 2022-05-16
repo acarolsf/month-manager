@@ -15,29 +15,38 @@ enum RegisterOriging {
 class RegisterItemViewController: UIViewController {
     
     private let accountTypeList = ["Água", "Luz", "Internet"]
+    
+    lazy var presenter = RegisterItemPresenter(view: self)
+    
     var origin: RegisterOriging?
     
     var keyboardShowing = false
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNeedsStatusBarAppearanceUpdate()
         title = origin == .edit ? "Editar conta" : "Cadastrar nova conta"
         setupUI()
         setupConstraints()
-        keyboardHandler()
+//        keyboardHandler()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        view.backgroundColor = .white
+        setupNavigationBar()
         ensureMainThread {
-            self.navigationController?.navigationBar.backgroundColor = UIColor(hex: "#054F77")
             self.navigationController?.setNavigationBarHidden(false, animated: animated)
         }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        unsubscribeFromKeyboardNotifications()
+//        unsubscribeFromKeyboardNotifications()
     }
     
     lazy var scrollView: UIScrollView = UIScrollView(constraintResizing: false)
@@ -82,6 +91,7 @@ class RegisterItemViewController: UIViewController {
         textField.placeholder = "Digite o preço"
         textField.addToolbar()
         textField.keyboardType = .numberPad
+        textField.type = .currency
         return textField
     }()
     
@@ -95,6 +105,8 @@ class RegisterItemViewController: UIViewController {
         let textField = TextField(constraintResizing: false)
         textField.placeholder = "Selecione o mês"
         textField.addToolbar()
+        textField.type = .date
+        textField.keyboardType = .numberPad
         return textField
     }()
     
@@ -127,7 +139,7 @@ class RegisterItemViewController: UIViewController {
         })
         
         mainView.backgroundColor = .white
-        createProfilePicker()
+//        createProfilePicker()
         
         if origin == .edit {
             accountTypeTextField.setDisabled()
@@ -135,7 +147,7 @@ class RegisterItemViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        let mainViewHeightConstraint = mainView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor)
+        let mainViewHeightConstraint = mainView.heightAnchor.constraint(greaterThanOrEqualTo: scrollView.heightAnchor)
         mainViewHeightConstraint.priority = .defaultLow
         
         NSLayoutConstraint.activate([
@@ -189,7 +201,8 @@ class RegisterItemViewController: UIViewController {
             monthTextField.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -24),
             monthTextField.heightAnchor.constraint(equalToConstant: 48),
             
-            registerItemButton.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -16),
+            registerItemButton.topAnchor.constraint(equalTo: monthTextField.bottomAnchor, constant: 16),
+//            registerItemButton.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -16),
             registerItemButton.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 24),
             registerItemButton.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -24),
             registerItemButton.heightAnchor.constraint(equalToConstant: 48)
@@ -205,7 +218,32 @@ class RegisterItemViewController: UIViewController {
     
     @objc func registerItem() {
         print("Register Item")
-        navigationController?.popViewController(animated: true)
+        guard let tipoConta = accountTypeTextField.text, let descricao = descriptionTextField.text, let mes = getDate(data: monthTextField.text), let preco = getPrice(priceTextField.text) else { return }
+        
+        let conta = Contas(tipoConta: tipoConta, descricao: descricao, mes: mes, preco: preco)
+        
+        presenter.save(conta: conta)
+
+    }
+    
+    func getPrice(_ value: String?) -> Double? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.locale = Locale(identifier: "pt_BR")
+        numberFormatter.numberStyle = .currency
+        
+        return 0.0
+    }
+    
+    func getDate(data: String?) -> Date? {
+        guard let data = data else {
+            return nil
+        }
+
+        let dateString = "01/\(data)"
+        
+        let dateFormate = DateFormatter()
+        dateFormate.dateFormat = "dd/MM/yyyy"
+        return dateFormate.date(from: dateString)
     }
 }
 
@@ -228,42 +266,56 @@ extension RegisterItemViewController: UIPickerViewDelegate, UIPickerViewDataSour
     }
 }
 
-extension RegisterItemViewController {
-    
-    func keyboardHandler() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clicked))
-        view.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc func clicked() {
-        view.endEditing(true)
-    }
-    
-    // Fix keyboard position
-    func subscribeToKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    func unsubscribeFromKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    @objc func keyboardWillShow(_ notification: Notification) {
-        if keyboardShowing { return }
-        keyboardShowing =  true
-        scrollView.contentInset.bottom += getKeyboardHeight(notification)
-    }
-    
-    func getKeyboardHeight(_ notification: Notification) -> CGFloat {
-        guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
-            fatalError("cant get keyboard size")
+extension RegisterItemViewController: RegisterItemViewProtocol {
+    func goBack() {
+        ensureMainThread {
+            self.navigationController?.popViewController(animated: true)
         }
-        return keyboardSize.cgRectValue.height
-    }
-    
-    @objc func keyboardWillHide(_ notification: Notification) {
-        keyboardShowing = false
-        scrollView.contentInset.bottom -= getKeyboardHeight(notification)
     }
 }
+
+extension UINavigationController {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        return topViewController?.preferredStatusBarStyle ?? .lightContent
+    }
+}
+//
+//extension RegisterItemViewController {
+//
+//    func keyboardHandler() {
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(clicked))
+//        view.addGestureRecognizer(tapGesture)
+//    }
+//
+//    @objc func clicked() {
+//        view.endEditing(true)
+//    }
+//
+//    // Fix keyboard position
+//    func subscribeToKeyboardNotifications() {
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+//    }
+//
+//    func unsubscribeFromKeyboardNotifications() {
+//        NotificationCenter.default.removeObserver(self)
+//    }
+//
+//    @objc func keyboardWillShow(_ notification: Notification) {
+//        if keyboardShowing { return }
+//        keyboardShowing =  true
+//        scrollView.contentInset.bottom += getKeyboardHeight(notification)
+//    }
+//
+//    func getKeyboardHeight(_ notification: Notification) -> CGFloat {
+//        guard let keyboardSize = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {
+//            fatalError("cant get keyboard size")
+//        }
+//        return keyboardSize.cgRectValue.height
+//    }
+//
+//    @objc func keyboardWillHide(_ notification: Notification) {
+//        keyboardShowing = false
+//        scrollView.contentInset.bottom -= getKeyboardHeight(notification)
+//    }
+//}
