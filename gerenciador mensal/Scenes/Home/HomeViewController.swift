@@ -160,7 +160,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let completeAction = UIContextualAction(style: .normal, title: "Excluir") { (_, _, completionHandler) in
             // delete the item her
-            self.deleteAlert(indexPath.row)
+            self.deleteAlert(indexPath)
             completionHandler(true)
         }
         completeAction.image = .remove
@@ -170,7 +170,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return configuration
     }
     
-    func deleteAlert(_ item: Int) {
+    func deleteAlert(_ item: IndexPath) {
         
         let delete = UIAlertController(title: "Excluir conta", message: "Deseja realmente excluir a Conta da água?", preferredStyle: .alert)
         
@@ -194,7 +194,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 extension HomeViewController: HomeViewProtocol {
     func removeItem(at index: IndexPath) {
         ensureMainThread {
-            self.tableView.deleteRows(at: [index], with: .fade)
+            self.tableView.deleteRows(at: [IndexPath(item: index.row, section: 1)], with: .fade)
         }
     }
     

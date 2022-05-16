@@ -24,18 +24,37 @@ class CoreDataManager {
     }()
 
     // MARK: - Core Data Saving support
-
-    func saveContext () {
+    
+    func saveContext() {
         let context = persistentContainer.viewContext
+        saveData(context)
+    }
+    
+    func fetchRequest<T>(entity: String) -> NSFetchRequest<T> {
+        return NSFetchRequest(entityName: entity)
+    }
+
+    func saveData (_ context: NSManagedObjectContext) {
+        
         if context.hasChanges {
             do {
                 try context.save()
             } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                print(error.localizedDescription)
             }
         }
     }
     
+    func fetchData<T>(_ fectchedResultController: NSFetchedResultsController<T>) {
+        do {
+            try fectchedResultController.performFetch()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
     
+    func deleteData(_ context: NSManagedObjectContext, item: NSManagedObject) {
+        context.delete(item)
+        saveData(context)
+    }
 }

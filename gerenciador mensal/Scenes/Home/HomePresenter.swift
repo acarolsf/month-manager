@@ -37,8 +37,8 @@ class HomePresenter {
         Contas.fetchContas(fetcher)
     }
     
-    func deleteConta(_ index: Int) {
-        guard let conta = fetcher.fetchedObjects?[index] else { return }
+    func deleteConta(_ index: IndexPath) {
+        guard let conta = fetcher.fetchedObjects?[index.row] else { return }
         conta.deleteConta(coreDataManager.persistentContainer.viewContext)
     }
 }

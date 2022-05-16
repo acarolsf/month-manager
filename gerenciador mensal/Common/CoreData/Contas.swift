@@ -33,32 +33,18 @@ class Contas: NSManagedObject {
 extension Contas {
     
     class func fetchRequest() -> NSFetchRequest<Contas> {
-        return NSFetchRequest(entityName: "Contas")
+        return CoreDataManager.shared.fetchRequest(entity: "Contas")
     }
     
     func save(_ context: NSManagedObjectContext) {
-        do {
-            try context.save()
-        } catch {
-            print(error.localizedDescription)
-        }
+        CoreDataManager.shared.saveData(context)
     }
     
-    class func fetchContas(_ fectchedResultController: NSFetchedResultsController<Contas>) {
-        do {
-            try fectchedResultController.performFetch()
-        } catch {
-            print(error.localizedDescription)
-        }
+    class func fetchContas(_ fetchedResultController: NSFetchedResultsController<Contas>) {
+        CoreDataManager.shared.fetchData(fetchedResultController)
     }
     
     func deleteConta(_ context: NSManagedObjectContext) {
-        context.delete(self)
-        
-        do {
-            try context.save()
-        } catch {
-            print(error.localizedDescription)
-        }
+        CoreDataManager.shared.deleteData(context, item: self)
     }
 }

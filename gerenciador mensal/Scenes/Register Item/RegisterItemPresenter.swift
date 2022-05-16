@@ -29,6 +29,7 @@ class RegisterItemPresenter {
     
     
     func editItem(conta: Contas) {
-        
+        conta.save(coreDataManager.persistentContainer.viewContext)
+        self.view?.goBack()
     }
 }
