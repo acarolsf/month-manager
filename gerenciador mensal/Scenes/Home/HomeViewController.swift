@@ -41,6 +41,14 @@ class HomeViewController: UIViewController {
         }
     }
     
+    lazy var logoutButton: UIButton = {
+        let button = UIButton(constraintResizing: false)
+        button.setImage(.logout, for: .normal)
+        button.tintColor = UIColor(hex: "#054F77")
+        button.addTarget(self, action: #selector(logout), for: .touchUpInside)
+        return button
+    }()
+    
     lazy var homeHeader: HomeHeader = {
         let view = HomeHeader(constraintResizing: true)
         return view
@@ -78,11 +86,16 @@ class HomeViewController: UIViewController {
     
     private func setupUI() {
         view.addSubview(tableView)
+        view.addSubview(logoutButton)
         view.addSubview(floatingButton)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            logoutButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
+            logoutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            logoutButton.heightAnchor.constraint(equalToConstant: 48),
+            
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -101,9 +114,21 @@ class HomeViewController: UIViewController {
         self.navigationController?.pushViewController(viewController, animated: true)
     }
     
-    @objc func goToEditPage() {
+    @objc func logout() {
+        presenter.logout()
+        navigationController?.pushViewController(LoginViewController(), animated: true)
+    }
+    
+    @objc func goToEditPage(_ conta: Contas) {
         let viewController = RegisterItemViewController()
         viewController.origin = .edit
+        viewController.conta = conta
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func goToDetailPage(conta: Contas) {
+        let viewController = AccountDetailsViewController()
+        viewController.conta = conta
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -124,6 +149,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? TableViewCell, let conta = self.presenter.fetcher.fetchedObjects?[indexPath.row] else { return UITableViewCell() }
         
+        print(conta.id)
         cell.setupCell(title: conta.descricao, subtitle: conta.tipoConta)
         return cell
 
@@ -145,10 +171,19 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return nil
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let conta = self.presenter.fetcher.fetchedObjects?[indexPath.row] else { return }
+        
+        self.goToDetailPage(conta: conta)
+    }
+    
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let conta = self.presenter.fetcher.fetchedObjects?[indexPath.row] else { return nil }
+        
         let completeAction = UIContextualAction(style: .normal, title: "Editar") { (_, _, completionHandler) in
             // delete the item here
-            self.goToEditPage()
+            
+            self.goToEditPage(conta)
             completionHandler(true)
         }
         completeAction.image = .edit

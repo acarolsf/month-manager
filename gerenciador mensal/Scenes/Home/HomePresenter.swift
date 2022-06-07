@@ -33,6 +33,10 @@ class HomePresenter {
         self.coreDataManager = coreDataManager
     }
     
+    func logout() {
+        UserDefaults.standard.eraseUsersDefaultData()
+    }
+    
     func fetchItems() {
         Contas.fetchContas(fetcher)
     }

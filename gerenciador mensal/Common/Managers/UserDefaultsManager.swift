@@ -33,4 +33,16 @@ class UserDefaultsManager {
     func removeUserDefaults(with key: UserDefaultsCustomKeys) {
         userDefaults.removeObject(forKey: key.rawValue)
     }
+    
+}
+
+extension UserDefaults {
+    func eraseUsersDefaultData() {
+        guard let appDomain = Bundle.main.bundleIdentifier else {
+            return
+        }
+        
+        removePersistentDomain(forName: appDomain)
+        synchronize()
+    }
 }

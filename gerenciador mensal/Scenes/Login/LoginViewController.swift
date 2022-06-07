@@ -51,6 +51,13 @@ class LoginViewController: UIViewController {
         return textField
     }()
     
+    lazy var passwordTextField: TextField = {
+        let textField = TextField(constraintResizing: false)
+        textField.placeholder = "Digite uma senha"
+        textField.isSecureTextEntry = true
+        return textField
+    }()
+    
     lazy var enterButton: UIButton = {
         let button = UIButton(constraintResizing: false)
         button.setTitle("Entrar", for: .normal)
@@ -67,6 +74,7 @@ class LoginViewController: UIViewController {
         mainView.addSubview(imageView)
         mainView.addSubview(titleLogo)
         mainView.addSubview(nameTextField)
+        mainView.addSubview(passwordTextField)
         mainView.addSubview(enterButton)
         
         mainView.backgroundColor = .white
@@ -93,7 +101,12 @@ class LoginViewController: UIViewController {
             nameTextField.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -24),
             nameTextField.heightAnchor.constraint(equalToConstant: 48),
             
-            enterButton.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 24),
+            passwordTextField.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 24),
+            passwordTextField.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 24),
+            passwordTextField.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -24),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 48),
+            
+            enterButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 24),
             enterButton.leadingAnchor.constraint(equalTo: mainView.leadingAnchor, constant: 24),
             enterButton.trailingAnchor.constraint(equalTo: mainView.trailingAnchor, constant: -24),
             enterButton.heightAnchor.constraint(equalToConstant: 48),
@@ -112,6 +125,4 @@ extension LoginViewController: LoginViewProtocol {
         viewController.userName = name
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
-    
 }

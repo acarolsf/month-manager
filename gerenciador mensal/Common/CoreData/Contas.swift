@@ -40,6 +40,10 @@ extension Contas {
         CoreDataManager.shared.saveData(context)
     }
     
+    class func updateData(_ context: NSManagedObjectContext, conta: Contas) {
+        conta.save(context)
+    }
+    
     class func fetchContas(_ fetchedResultController: NSFetchedResultsController<Contas>) {
         CoreDataManager.shared.fetchData(fetchedResultController)
     }

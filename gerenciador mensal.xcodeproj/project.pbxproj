@@ -9,9 +9,12 @@
 /* Begin PBXBuildFile section */
 		DE156D3228215D5300267D7C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156D3128215D5300267D7C /* CoreDataManager.swift */; };
 		DE156D3B282177DE00267D7C /* Contas.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE156D3A282177DE00267D7C /* Contas.swift */; };
+		DE403043284FDE68008D5B6A /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE403042284FDE68008D5B6A /* KeychainManager.swift */; };
 		DE51BCC9281D9F0A002447E0 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51BCC8281D9F0A002447E0 /* TableViewCell.swift */; };
 		DE51BCCC281DBA1D002447E0 /* HomeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE51BCCB281DBA1D002447E0 /* HomeHeader.swift */; };
 		DE5B92C9282AE828004A9516 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE5B92C8282AE828004A9516 /* Launch Screen.storyboard */; };
+		DE6E249C283406D900D0A5B9 /* AccountDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6E249B283406D900D0A5B9 /* AccountDetailsViewController.swift */; };
+		DE6E249E283406EA00D0A5B9 /* AccountDetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE6E249D283406EA00D0A5B9 /* AccountDetailsPresenter.swift */; };
 		DECE7CC228219C6F004D562E /* String+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE7CC128219C6F004D562E /* String+Utils.swift */; };
 		DECE9C1B281D6EBF00964B99 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE9C1A281D6EBF00964B99 /* HomeViewController.swift */; };
 		DECE9C1D281D702900964B99 /* UIView+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECE9C1C281D702900964B99 /* UIView+Utils.swift */; };
@@ -29,15 +32,20 @@
 		DEDCFE5B281CA28E008B0D96 /* UIImage+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDCFE5A281CA28E008B0D96 /* UIImage+Utils.swift */; };
 		DEDCFE5D281CA4DB008B0D96 /* UIColor+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDCFE5C281CA4DB008B0D96 /* UIColor+Utils.swift */; };
 		DEDCFE60281CA65C008B0D96 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDCFE5F281CA65C008B0D96 /* TextField.swift */; };
+		DEEDA02328355055001AC850 /* Validation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEDA02228355055001AC850 /* Validation.swift */; };
+		DEEDA0252835540A001AC850 /* UILabel+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEEDA0242835540A001AC850 /* UILabel+Utils.swift */; };
 		DEF347C02823291E00671AEB /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF347BF2823291E00671AEB /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DE156D3128215D5300267D7C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		DE156D3A282177DE00267D7C /* Contas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contas.swift; sourceTree = "<group>"; };
+		DE403042284FDE68008D5B6A /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		DE51BCC8281D9F0A002447E0 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		DE51BCCB281DBA1D002447E0 /* HomeHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeHeader.swift; sourceTree = "<group>"; };
 		DE5B92C8282AE828004A9516 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		DE6E249B283406D900D0A5B9 /* AccountDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsViewController.swift; sourceTree = "<group>"; };
+		DE6E249D283406EA00D0A5B9 /* AccountDetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailsPresenter.swift; sourceTree = "<group>"; };
 		DECE7CC128219C6F004D562E /* String+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Utils.swift"; sourceTree = "<group>"; };
 		DECE9C1A281D6EBF00964B99 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		DECE9C1C281D702900964B99 /* UIView+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Utils.swift"; sourceTree = "<group>"; };
@@ -57,6 +65,8 @@
 		DEDCFE5A281CA28E008B0D96 /* UIImage+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Utils.swift"; sourceTree = "<group>"; };
 		DEDCFE5C281CA4DB008B0D96 /* UIColor+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Utils.swift"; sourceTree = "<group>"; };
 		DEDCFE5F281CA65C008B0D96 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		DEEDA02228355055001AC850 /* Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validation.swift; sourceTree = "<group>"; };
+		DEEDA0242835540A001AC850 /* UILabel+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Utils.swift"; sourceTree = "<group>"; };
 		DEF347BF2823291E00671AEB /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,6 +90,15 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		DE403041284FDE4C008D5B6A /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				DEF347BF2823291E00671AEB /* UserDefaultsManager.swift */,
+				DE403042284FDE68008D5B6A /* KeychainManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		DE51BCCA281DBA08002447E0 /* Header */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,9 +115,19 @@
 			path = "Launch Screen";
 			sourceTree = "<group>";
 		};
+		DE6E249A2834069300D0A5B9 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				DE6E249B283406D900D0A5B9 /* AccountDetailsViewController.swift */,
+				DE6E249D283406EA00D0A5B9 /* AccountDetailsPresenter.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
 		DECE9C15281D6C7C00964B99 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				DE6E249A2834069300D0A5B9 /* Details */,
 				DE5B92C7282AE809004A9516 /* Launch Screen */,
 				DECE9C24281D7A1F00964B99 /* Register Item */,
 				DECE9C19281D6EA200964B99 /* Home */,
@@ -185,6 +214,7 @@
 		DEDCFE59281CA27C008B0D96 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				DE403041284FDE4C008D5B6A /* Managers */,
 				DE156D362821619400267D7C /* CoreData */,
 				DEDCFE5A281CA28E008B0D96 /* UIImage+Utils.swift */,
 				DEDCFE5C281CA4DB008B0D96 /* UIColor+Utils.swift */,
@@ -192,7 +222,8 @@
 				DECE9C22281D77F600964B99 /* Threading.swift */,
 				DECE9C27281D859D00964B99 /* TextField+Utils.swift */,
 				DECE7CC128219C6F004D562E /* String+Utils.swift */,
-				DEF347BF2823291E00671AEB /* UserDefaultsManager.swift */,
+				DEEDA02228355055001AC850 /* Validation.swift */,
+				DEEDA0242835540A001AC850 /* UILabel+Utils.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -276,22 +307,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				DECE7CC228219C6F004D562E /* String+Utils.swift in Sources */,
+				DEEDA0252835540A001AC850 /* UILabel+Utils.swift in Sources */,
 				DEDCFE43281C9C09008B0D96 /* LoginViewController.swift in Sources */,
 				DE51BCC9281D9F0A002447E0 /* TableViewCell.swift in Sources */,
 				DECE9C2A281D8CA200964B99 /* RegisterItemPresenter.swift in Sources */,
 				DECE9C28281D859D00964B99 /* TextField+Utils.swift in Sources */,
 				DEDCFE49281C9C09008B0D96 /* gerenciador_mensal.xcdatamodeld in Sources */,
 				DECE9C26281D7A6700964B99 /* RegisterItemViewController.swift in Sources */,
+				DE6E249C283406D900D0A5B9 /* AccountDetailsViewController.swift in Sources */,
 				DE156D3228215D5300267D7C /* CoreDataManager.swift in Sources */,
 				DEDCFE3F281C9C09008B0D96 /* AppDelegate.swift in Sources */,
 				DECE9C1F281D769800964B99 /* HomePresenter.swift in Sources */,
 				DE156D3B282177DE00267D7C /* Contas.swift in Sources */,
+				DE403043284FDE68008D5B6A /* KeychainManager.swift in Sources */,
 				DECE9C23281D77F600964B99 /* Threading.swift in Sources */,
+				DEEDA02328355055001AC850 /* Validation.swift in Sources */,
 				DE51BCCC281DBA1D002447E0 /* HomeHeader.swift in Sources */,
 				DECE9C21281D76A700964B99 /* LoginPresenter.swift in Sources */,
 				DECE9C1B281D6EBF00964B99 /* HomeViewController.swift in Sources */,
 				DEDCFE60281CA65C008B0D96 /* TextField.swift in Sources */,
 				DEDCFE5D281CA4DB008B0D96 /* UIColor+Utils.swift in Sources */,
+				DE6E249E283406EA00D0A5B9 /* AccountDetailsPresenter.swift in Sources */,
 				DEF347C02823291E00671AEB /* UserDefaultsManager.swift in Sources */,
 				DEDCFE5B281CA28E008B0D96 /* UIImage+Utils.swift in Sources */,
 				DECE9C1D281D702900964B99 /* UIView+Utils.swift in Sources */,

@@ -16,6 +16,11 @@ extension UIImage {
         return image
     }
     
+    public class var logout: UIImage {
+        guard let image = UIImage(named: "logout", in: Bundle(for: ImageManager.self), compatibleWith: nil) else { return UIImage() }
+        return image
+    }
+    
     public class var add: UIImage {
         guard let image = UIImage(named: "add", in: Bundle(for: ImageManager.self), compatibleWith: nil) else { return UIImage() }
         return image

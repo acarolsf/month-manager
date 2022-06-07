@@ -20,6 +20,12 @@ class RegisterItemViewController: UIViewController {
     
     var origin: RegisterOriging?
     
+    var conta: Contas? {
+        didSet {
+            self.setTextFieldsData()
+        }
+    }
+    
     var keyboardShowing = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -209,6 +215,15 @@ class RegisterItemViewController: UIViewController {
         ])
     }
     
+    private func setTextFieldsData() {
+        guard let conta = conta else { return }
+        
+        accountTypeTextField.text = conta.tipoConta
+        descriptionTextField.text = conta.descricao
+        priceTextField.text = Validation.shared.convertPriceToString(conta.preco)
+        monthTextField.text = Validation.shared.convertDateToString(date: conta.mes)
+    }
+    
     func createProfilePicker() {
         let profilePickerView = UIPickerView()
         profilePickerView.delegate = self
@@ -217,38 +232,22 @@ class RegisterItemViewController: UIViewController {
     }
     
     @objc func registerItem() {
-        print("Register Item")
-        guard let tipoConta = accountTypeTextField.text, let descricao = descriptionTextField.text, let mes = getDate(data: monthTextField.text) else { return }
+        guard let tipoConta = accountTypeTextField.text, let descricao = descriptionTextField.text, let mes = Validation.shared.convertDateToDate(date: monthTextField.text) else { return }
         
-        let preco = getPrice(priceTextField.text)
+        let preco = Validation.shared.convertPriceToDouble(priceTextField.text)
         
         let conta = Contas(tipoConta: tipoConta, descricao: descricao, mes: mes, preco: preco)
         
+        if origin == .edit {
+            self.conta?.descricao = descricao
+            self.conta?.tipoConta = tipoConta
+            self.conta?.mes = mes
+            self.conta?.preco = preco
+            presenter.editItem(conta: self.conta!)
+            return
+        }
         presenter.save(conta: conta)
 
-    }
-    
-    func getPrice(_ value: String?) -> Double {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.locale = Locale(identifier: "pt_BR")
-        numberFormatter.numberStyle = .currency
-    
-        if let value = value, let number = numberFormatter.number(from: value) {
-            return number.doubleValue
-        }
-        return 0.0
-    }
-    
-    func getDate(data: String?) -> Date? {
-        guard let data = data else {
-            return nil
-        }
-
-        let dateString = "01/\(data)"
-        
-        let dateFormate = DateFormatter()
-        dateFormate.dateFormat = "dd/MM/yyyy"
-        return dateFormate.date(from: dateString)
     }
 }
 
